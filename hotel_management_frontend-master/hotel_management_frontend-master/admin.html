@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Luxe Hotels</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Luxe Hotels Admin</h1>
+            <nav>
+                <ul>
+                    <li><a href="./admin.html" class="active"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                    <li><a href="./booking.html"><i class="ri-calendar-check-line"></i> Bookings</a></li>
+                    <li><a href="./rooms.html"><i class="ri-hotel-bed-line"></i> Rooms</a></li>
+                    <li><a href="./hotel.html"><i class="ri-building-line"></i> Hotels</a></li>
+                    <li id="username"><i class="ri-user-3-fill"></i> <span></span></li>
+                    <li id="logoutBtn" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-container">
+            <section class="welcome-section">
+                <div id="welcome-section">
+                    <h2>Welcome to Admin Dashboard</h2>
+                    <p>Manage your hotels, rooms, and bookings efficiently</p>
+                </div>
+            </section>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="ri-building-2-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Hotels</h3>
+                        <p class="stat-number" id="totalHotels">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="ri-hotel-bed-fill"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Rooms</h3>
+                        <p class="stat-number" id="totalRooms">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="ri-calendar-check-fill"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Active Bookings</h3>
+                        <p class="stat-number" id="activeBookings">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="ri-money-dollar-circle-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Revenue</h3>
+                        <p class="stat-number">₹<span id="totalRevenue">0</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-cards">
+                    <div class="action-card" onclick="window.location.href='./hotel.html'">
+                        <i class="ri-add-circle-line"></i>
+                        <h4>Add New Hotel</h4>
+                        <p>Register a new hotel property</p>
+                    </div>
+                    <div class="action-card" onclick="window.location.href='./rooms.html'">
+                        <i class="ri-door-open-line"></i>
+                        <h4>Manage Rooms</h4>
+                        <p>Add or update room details</p>
+                    </div>
+                    <div class="action-card" onclick="window.location.href='./booking.html?view=all'">
+                        <i class="ri-book-2-line"></i>
+                        <h4>View All Bookings</h4>
+                        <p>Check all user reservations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Luxe Hotels Admin. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const authToken = localStorage.getItem('auth-token');
+            const userRole = localStorage.getItem('userRole');
+            
+            if (!authToken) {
+                window.location.href = "./index.html";
+                return;
+            }
+            
+            // Check if user is admin
+            if (userRole !== 'admin') {
+                alert('Access Denied! Only administrators can access this page.');
+                window.location.href = "./user.html";
+                return;
+            }
+
+            // Display username
+            const username = localStorage.getItem('username');
+            const usernameElement = document.querySelector("#username span");
+            if (usernameElement && username) {
+                usernameElement.textContent = username;
+            }
+
+            // Fetch and display statistics
+            fetchStatistics();
+        });
+
+        const logout = () => {
+            const confirm = window.confirm('Are you sure you want to logout?');
+            if(confirm){
+                localStorage.removeItem('auth-token');
+                localStorage.removeItem('username');
+                localStorage.removeItem('userRole');
+                window.location.href = "./index.html";
+            }
+        }
+
+        async function fetchStatistics() {
+            try {
+                // Fetch hotels count
+                const hotelsRes = await fetch('http://localhost:3000/hotel');
+                const hotels = await hotelsRes.json();
+                document.getElementById('totalHotels').textContent = hotels.length || 0;
+
+                // Fetch rooms count
+                const roomsRes = await fetch('http://localhost:3000/rooms');
+                const rooms = await roomsRes.json();
+                document.getElementById('totalRooms').textContent = rooms.length || 0;
+
+                // Fetch bookings count
+                const bookingsRes = await fetch('http://localhost:3000/bookings');
+                const bookings = await bookingsRes.json();
+                document.getElementById('activeBookings').textContent = bookings.length || 0;
+
+                // Calculate revenue (mock calculation)
+                const revenue = bookings.length * 150;
+                document.getElementById('totalRevenue').textContent = revenue.toLocaleString();
+            } catch (error) {
+                console.error('Error fetching statistics:', error);
+            }
+        }
+    </script>
+</body>
+</html>

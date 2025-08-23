@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
+    <title>Luxe Hotels - Premium Hospitality Experience</title>
+  </head>
+  <body class="auth-body">
+    <div class="auth-container">
+      <!-- Left Side - Image/Brand Section -->
+      <div class="auth-brand-section">
+        <div class="brand-content">
+          <div class="brand-logo">
+            <i class="ri-hotel-line"></i>
+            <h1>Luxe Hotels</h1>
+          </div>
+          <h2 class="brand-tagline">Experience Luxury Redefined</h2>
+          <p class="brand-description">
+            Discover world-class hospitality with our premium collection of hotels and resorts
+          </p>
+          <div class="brand-features">
+            <div class="feature-item">
+              <i class="ri-star-fill"></i>
+              <span>5-Star Service</span>
+            </div>
+            <div class="feature-item">
+              <i class="ri-map-pin-line"></i>
+              <span>Prime Locations</span>
+            </div>
+            <div class="feature-item">
+              <i class="ri-shield-check-line"></i>
+              <span>Secure Booking</span>
+            </div>
+          </div>
+        </div>
+        <div class="brand-overlay"></div>
+      </div>
+
+      <!-- Right Side - Auth Forms -->
+      <div class="auth-form-section">
+        <div class="auth-forms-wrapper">
+          <!-- Tab Navigation -->
+          <div class="auth-tabs">
+            <button class="tab-btn active" onclick="switchToLogin()">
+              <i class="ri-user-line"></i>
+              Login
+            </button>
+            <button class="tab-btn" onclick="switchToRegister()">
+              <i class="ri-user-add-line"></i>
+              Register
+            </button>
+          </div>
+
+          <!-- Login Form -->
+          <div class="auth-form-container" id="loginForm">
+            <form class="modern-auth-form">
+              <div class="form-header">
+                <h2>Welcome Back</h2>
+                <p>Please enter your details to continue</p>
+              </div>
+
+              <div class="form-body">
+                <div class="input-group">
+                  <div class="input-wrapper">
+                    <i class="ri-mail-line input-icon"></i>
+                    <input 
+                      type="email" 
+                      id="login-email" 
+                      class="modern-input" 
+                      placeholder=" "
+                      required
+                    />
+                    <label for="login-email" class="modern-label">Email Address</label>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <div class="input-wrapper">
+                    <i class="ri-lock-line input-icon"></i>
+                    <input 
+                      type="password" 
+                      id="login-pass" 
+                      class="modern-input" 
+                      placeholder=" "
+                      required
+                    />
+                    <label for="login-pass" class="modern-label">Password</label>
+                    <i class="ri-eye-off-line toggle-password" id="login-eye"></i>
+                  </div>
+                </div>
+
+                <div class="form-options">
+                  <label class="modern-checkbox">
+                    <input type="checkbox" id="remember-me" />
+                    <span class="checkbox-mark"></span>
+                    <span class="checkbox-label">Remember me</span>
+                  </label>
+                  <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <div class="role-selector">
+                  <label class="role-toggle">
+                    <input type="checkbox" id="login-check" onclick="toggleLoginRole()" />
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Admin Login</span>
+                  </label>
+                  <div class="role-display">
+                    Logging in as: <strong id="loginRoleDisplay">Regular User</strong>
+                  </div>
+                </div>
+
+                <button type="submit" class="auth-submit-btn">
+                  <span>Sign In</span>
+                  <i class="ri-arrow-right-line"></i>
+                </button>
+
+                <div class="divider">
+                  <span>OR</span>
+                </div>
+
+                <div class="social-auth">
+                  <button type="button" class="social-btn">
+                    <i class="ri-google-fill"></i>
+                  </button>
+                  <button type="button" class="social-btn">
+                    <i class="ri-facebook-fill"></i>
+                  </button>
+                  <button type="button" class="social-btn">
+                    <i class="ri-twitter-fill"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-footer">
+                <p>Don't have an account? 
+                  <a href="#" onclick="switchToRegister()">Create Account</a>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Register Form -->
+          <div class="auth-form-container" id="registerForm" style="display: none;">
+            <form class="modern-auth-form">
+              <div class="form-header">
+                <h2>Create Account</h2>
+                <p>Join us for an exceptional experience</p>
+              </div>
+
+              <div class="form-body">
+                <div class="input-group">
+                  <div class="input-wrapper">
+                    <i class="ri-user-line input-icon"></i>
+                    <input 
+                      type="text" 
+                      id="register-name" 
+                      class="modern-input" 
+                      placeholder=" "
+                      required
+                    />
+                    <label for="register-name" class="modern-label">Full Name</label>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <div class="input-wrapper">
+                    <i class="ri-mail-line input-icon"></i>
+                    <input 
+                      type="email" 
+                      id="register-email" 
+                      class="modern-input" 
+                      placeholder=" "
+                      required
+                    />
+                    <label for="register-email" class="modern-label">Email Address</label>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <div class="input-wrapper">
+                    <i class="ri-lock-line input-icon"></i>
+                    <input 
+                      type="password" 
+                      id="register-pass" 
+                      class="modern-input" 
+                      placeholder=" "
+                      required
+                    />
+                    <label for="register-pass" class="modern-label">Password</label>
+                    <i class="ri-eye-off-line toggle-password" id="register-eye"></i>
+                  </div>
+                </div>
+
+                <div class="password-strength">
+                  <div class="strength-bar">
+                    <div class="strength-progress"></div>
+                  </div>
+                  <span class="strength-text">Password strength</span>
+                </div>
+
+                <div class="role-selector">
+                  <label class="role-toggle">
+                    <input type="checkbox" id="register-is-admin" onclick="toggleRegisterRole()" />
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Register as Admin</span>
+                  </label>
+                  <div class="role-display">
+                    Registering as: <strong id="registerRoleDisplay">Regular User</strong>
+                  </div>
+                </div>
+
+                <div class="terms-checkbox">
+                  <label class="modern-checkbox">
+                    <input type="checkbox" id="accept-terms" required />
+                    <span class="checkbox-mark"></span>
+                    <span class="checkbox-label">
+                      I agree to the <a href="#">Terms & Conditions</a>
+                    </span>
+                  </label>
+                </div>
+
+                <button type="submit" class="auth-submit-btn">
+                  <span>Create Account</span>
+                  <i class="ri-arrow-right-line"></i>
+                </button>
+
+                <div class="divider">
+                  <span>OR</span>
+                </div>
+
+                <div class="social-auth">
+                  <button type="button" class="social-btn">
+                    <i class="ri-google-fill"></i>
+                  </button>
+                  <button type="button" class="social-btn">
+                    <i class="ri-facebook-fill"></i>
+                  </button>
+                  <button type="button" class="social-btn">
+                    <i class="ri-twitter-fill"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-footer">
+                <p>Already have an account? 
+                  <a href="#" onclick="switchToLogin()">Sign In</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+      function switchToLogin() {
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.querySelectorAll('.tab-btn')[1].classList.remove('active');
+      }
+
+      function switchToRegister() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+        document.querySelectorAll('.tab-btn')[0].classList.remove('active');
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+      }
+
+      function toggleLoginRole() {
+        const checkbox = document.getElementById('login-check');
+        const display = document.getElementById('loginRoleDisplay');
+        display.textContent = checkbox.checked ? 'Administrator' : 'Regular User';
+        display.style.color = checkbox.checked ? '#f59e0b' : '#2563eb';
+      }
+      
+      function toggleRegisterRole() {
+        const checkbox = document.getElementById('register-is-admin');
+        const display = document.getElementById('registerRoleDisplay');
+        display.textContent = checkbox.checked ? 'Administrator' : 'Regular User';
+        display.style.color = checkbox.checked ? '#f59e0b' : '#2563eb';
+      }
+
+      // Password strength checker
+      document.getElementById('register-pass')?.addEventListener('input', function(e) {
+        const password = e.target.value;
+        const strengthBar = document.querySelector('.strength-progress');
+        const strengthText = document.querySelector('.strength-text');
+        
+        let strength = 0;
+        if (password.length >= 8) strength++;
+        if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+        if (password.match(/[0-9]/)) strength++;
+        if (password.match(/[^a-zA-Z0-9]/)) strength++;
+        
+        const widths = ['0%', '25%', '50%', '75%', '100%'];
+        const colors = ['#ef4444', '#f59e0b', '#f59e0b', '#10b981', '#10b981'];
+        const texts = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+        
+        if (strengthBar) {
+          strengthBar.style.width = widths[strength];
+          strengthBar.style.background = colors[strength];
+        }
+        if (strengthText) {
+          strengthText.textContent = password.length > 0 ? texts[strength] : 'Password strength';
+          strengthText.style.color = password.length > 0 ? colors[strength] : '#9ca3af';
+        }
+      });
+    </script>
+  </body>
+</html>
