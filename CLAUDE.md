@@ -5,15 +5,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 This is a Hotel Management System with separate frontend and backend applications:
-- **Backend**: Node.js/Express API with MongoDB database (located in `hotel_management_backend-master/`)
-- **Frontend**: Vanilla JavaScript/HTML/CSS application (located in `hotel_management_frontend-master/`)
+- **Backend**: Node.js/Express API with MongoDB database (located in `backend/`)
+- **Frontend**: Vanilla JavaScript/HTML/CSS application (located in `frontend/`)
 
 ## Common Development Commands
 
 ### Backend Commands
 ```bash
 # Navigate to backend directory
-cd hotel_management_backend-master/hotel_management_backend-master
+cd backend
 
 # Install dependencies
 npm install
@@ -25,7 +25,7 @@ npm start
 ```
 
 ### Frontend Commands
-The frontend is a static site - open `hotel_management_frontend-master/hotel_management_frontend-master/index.html` directly in a browser or serve with any static file server.
+The frontend is a static site - open `frontend/index.html` directly in a browser or serve with any static file server.
 
 ## Architecture Overview
 
